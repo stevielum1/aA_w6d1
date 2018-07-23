@@ -5,7 +5,7 @@ function Asteroid(pos) {
   MovingObject.call(this, pos);
   this.color = Asteroid.COLOR;
   this.radius = Asteroid.RADIUS;
-  this.vel = Util.randomVec(10);
+  this.vel = Util.randomVec(5);
 }
 
 Asteroid.COLOR = "#6d6d6d";
