@@ -8,8 +8,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let gameView = new GameView(ctx);
   gameView.start();
 });
-
-
-
-
-//.draw(document.getElementById('game-canvas').getContext('2d'))
