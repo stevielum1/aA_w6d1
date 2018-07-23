@@ -1,4 +1,5 @@
 /* PHASE 8: Thumbs */
 .profile-friends li {
   float: left;
+  width: 33%;
 }
