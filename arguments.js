@@ -15,15 +15,17 @@ function sum(...args) {
   return sum;
 }
 
-// Function.prototype.myBind = function(ctx) {
-//   let bindArgs = Array.from(arguments);
-//   bindArgs.shift(); //remove ctx from bind args
-//   let that = this;
-//   return function() {
-//     let callArgs = Array.from(arguments);
-//     return that.apply(ctx, bindArgs.concat(callArgs));
-//   };
-// };
+Function.prototype.myBind = function(ctx) {
+  let bindArgs = Array.from(arguments);
+  bindArgs.shift(); //remove ctx from bind args
+  // let that = this;
+  return (...callArgs) => {
+  // return function() {
+    // let callArgs = Array.from(arguments);
+    // return that.apply(ctx, bindArgs.concat(callArgs));
+    return this.apply(ctx, bindArgs.concat(callArgs));
+  };
+};
 
 Function.prototype.myBind = function(ctx, ...bindArgs) {
   return (...callArgs) => {
