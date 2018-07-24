@@ -1,5 +1,6 @@
 const Asteroid = require("./asteroid.js");
 const Ship = require("./ship.js");
+const Bullet = require("./bullet.js");
 
 function Game() {
   this.asteroids = [];
@@ -8,6 +9,7 @@ function Game() {
     { pos: this.randomPosition(),
       game: this
    });
+  this.bullets = [];
 }
 
 Game.DIM_X = 1000;
@@ -79,13 +81,31 @@ Game.prototype.step = function() {
   this.checkCollisions();
 };
 
-Game.prototype.remove = function(asteroid) {
-  let idx = this.asteroids.indexOf(asteroid);
-  this.asteroids.splice(idx, 1);
-};
+// Game.prototype.remove = function(asteroid) {
+//   let idx = this.asteroids.indexOf(asteroid);
+//   this.asteroids.splice(idx, 1);
+// };
 
 Game.prototype.allObjects = function() {
-  return this.asteroids.concat([this.ship]);
+  return this.asteroids.concat([this.ship]).concat(this.bullets);
+};
+
+Game.prototype.add = function(obj) {
+  if (obj instanceof Asteroid) {
+    this.asteroids.push(obj);
+  } else if (obj instanceof Bullet) {
+    this.bullets.push(obj);
+  }
+};
+
+Game.prototype.remove = function(obj) {
+  if (obj instanceof Asteroid) {
+    let idx = this.asteroids.indexOf(obj);
+    this.asteroids.splice(idx, 1);
+  } else if (obj instanceof Bullet) {
+    let idx = this.bullets.indexOf(obj);
+    this.bullets.splice(idx, 1);
+  }
 };
 
 module.exports = Game;

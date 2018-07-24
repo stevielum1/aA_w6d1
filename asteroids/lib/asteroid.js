@@ -2,8 +2,8 @@ const MovingObject = require("./moving_object.js");
 const Util = require("./utils.js");
 const Ship = require("./ship.js");
 
-function Asteroid(pos) {
-  MovingObject.call(this, pos);
+function Asteroid(options) {
+  MovingObject.call(this, options);
   this.color = Asteroid.COLOR;
   this.radius = Asteroid.RADIUS;
   this.vel = Util.randomVec(5);
