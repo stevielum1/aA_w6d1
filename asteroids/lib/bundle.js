@@ -111,7 +111,7 @@ eval("const Asteroid = __webpack_require__(/*! ./asteroid.js */ \"./lib/asteroid
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Game = __webpack_require__(/*! ./game.js */ \"./lib/game.js\");\n\nfunction GameView(ctx) {\n  this.game = new Game();\n  this.ctx = ctx;\n}\n\nGameView.prototype.start = function() {\n  window.setInterval(this.game.step.bind(this.game), 20);\n  window.setInterval(this.game.draw.bind(this.game, this.ctx), 20);\n};\n\nmodule.exports = GameView;\n\n\n//# sourceURL=webpack:///./lib/game_view.js?");
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./lib/game.js\");\n\nfunction GameView(ctx) {\n  this.game = new Game();\n  this.ctx = ctx;\n}\n\nGameView.prototype.start = function() {\n  this.bindKeyHandlers();\n  window.setInterval(this.game.step.bind(this.game), 20);\n  window.setInterval(this.game.draw.bind(this.game, this.ctx), 20);\n};\n\nGameView.prototype.bindKeyHandlers = function() {\n  let that = this;\n  key('w', function() { that.game.ship.power([0, -1]); });\n  key('a', function() { that.game.ship.power([-1, 0]); });\n  key('s', function() { that.game.ship.power([0, 1]); });\n  key('d', function() { that.game.ship.power([1, 0]); });\n};\n\nmodule.exports = GameView;\n\n\n//# sourceURL=webpack:///./lib/game_view.js?");
 
 /***/ }),
 
@@ -133,7 +133,7 @@ eval("function MovingObject(options) {\n  this.pos = options.pos;\n  this.vel = 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./lib/moving_object.js\");\nconst Util = __webpack_require__(/*! ./utils.js */ \"./lib/utils.js\");\n\nfunction Ship(pos) {\n  MovingObject.call(this, pos);\n  this.color = Ship.COLOR;\n  this.radius = Ship.RADIUS;\n  this.vel = [0, 0];\n}\n\nShip.RADIUS = 10;\nShip.COLOR = \"#00ff00\";\n\nUtil.inherits(Ship, MovingObject);\n\nShip.prototype.relocate = function() {\n  this.pos = this.game.randomPosition();\n  this.vel = [0, 0];\n};\n\nmodule.exports = Ship;\n\n\n//# sourceURL=webpack:///./lib/ship.js?");
+eval("const MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./lib/moving_object.js\");\nconst Util = __webpack_require__(/*! ./utils.js */ \"./lib/utils.js\");\n\nfunction Ship(pos) {\n  MovingObject.call(this, pos);\n  this.color = Ship.COLOR;\n  this.radius = Ship.RADIUS;\n  this.vel = [0, 0];\n}\n\nShip.RADIUS = 10;\nShip.COLOR = \"#00ff00\";\n\nUtil.inherits(Ship, MovingObject);\n\nShip.prototype.relocate = function() {\n  this.pos = this.game.randomPosition();\n  this.vel = [0, 0];\n};\n\nShip.prototype.power = function(impulse) {\n  this.vel[0] += impulse[0];\n  this.vel[1] += impulse[1];\n};\n\nmodule.exports = Ship;\n\n\n//# sourceURL=webpack:///./lib/ship.js?");
 
 /***/ }),
 
